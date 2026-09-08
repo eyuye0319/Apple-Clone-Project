@@ -1,0 +1,187 @@
+/* Reusable header values */
+:root {
+  --header-height: 44px;
+  --header-text: #1d1d1f;
+  --header-border: rgba(0, 0, 0, 0.06);
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --header-max-width: 1024px;
+  --desktop-padding: 22px;
+  --mobile-padding: 16px;
+  --icon-gap: 20px;
+}
+
+/* Main sticky header */
+.main-header {
+  width: 100%;
+  height: var(--header-height);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  background-color: var(--header-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-bottom: 1px solid var(--header-border);
+}
+
+/* Main navigation layout */
+.main-nav {
+  width: 100%;
+  max-width: var(--header-max-width);
+  height: var(--header-height);
+  margin: 0 auto;
+  padding: 0 var(--desktop-padding);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Navigation links */
+.main-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--header-text);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+/* Navigation hover */
+.main-nav a:hover {
+  opacity: 0.65;
+}
+
+/* Logo and icon alignment */
+.nav-logo,
+.nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Apple logo */
+.nav-logo img {
+  width: 14px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+  filter: invert(1);
+}
+
+/* Search and bag icons */
+.nav-icon img {
+  width: 16px;
+  height: 18px;
+  object-fit: contain;
+  display: block;
+  filter: invert(1);
+}
+
+/* Mobile menu button */
+.menu-button {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+  /* Mobile navigation */
+  .main-nav {
+    padding: 0 var(--mobile-padding);
+  }
+
+  /* Apple logo position */
+  .nav-logo {
+    margin-right: auto;
+  }
+
+  /* Mobile icon spacing */
+  .nav-icon {
+    margin-left: var(--icon-gap);
+  }
+
+  /* Show menu button */
+  .menu-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 18px;
+    height: var(--header-height);
+    margin-left: var(--icon-gap);
+    z-index: 1100;
+  }
+
+  /* Menu button lines */
+  .menu-line {
+    width: 18px;
+    height: 1px;
+    display: block;
+    background-color: var(--header-text);
+    transition: transform 0.25s ease;
+  }
+
+  /* Hide text links on mobile */
+  .main-nav > a:not(.nav-logo):not(.nav-icon) {
+    display: none;
+  }
+
+  /* Full screen open menu */
+  .main-nav.menu-open {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+    max-width: none;
+    padding: 70px 35px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: #fff;
+    z-index: 1050;
+  }
+
+  /* Hide logo and icons when menu opens */
+  .main-nav.menu-open .nav-logo,
+  .main-nav.menu-open .nav-icon {
+    display: none;
+  }
+
+  /* Show menu links */
+  .main-nav.menu-open > a:not(.nav-logo):not(.nav-icon) {
+    display: block;
+    width: 100%;
+    padding: 5px 0;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.25;
+    text-align: left;
+  }
+
+  /* Close button position */
+  .main-nav.menu-open .menu-button {
+    position: absolute;
+    top: 0;
+    right: 18px;
+    margin: 0;
+    height: var(--header-height);
+  }
+
+  /* First line becomes X */
+  .main-nav.menu-open .menu-line:first-child {
+    transform: translateY(3px) rotate(45deg);
+  }
+
+  /* Second line becomes X */
+  .main-nav.menu-open .menu-line:last-child {
+    transform: translateY(-3px) rotate(-45deg);
+  }
+}
